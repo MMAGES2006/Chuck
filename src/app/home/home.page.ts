@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChuckieService } from '../chuckie.service';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,16 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  Chucklist: any = [];
+  Jokelist: any = [];
+
+  constructor(private chuckieService: ChuckieService) {}
+
+  ngOnInit() {
+    this.chuckieService.getlistChuck().subscribe((data) => {this.Chucklist = data
+          })
+
+    this.chuckieService.getJokes().subscribe((data) => {this.Jokelist = data})
+        }
 
 }
